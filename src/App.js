@@ -2,13 +2,15 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import StateLessComponent from './components/StateLessComponent';
-import StateFullComponent from './components/StateFullComponent';
+import StateFulComponent from './components/StateFulComponent';
+import Home from './baitapchiacomponent/Home';
 
 function App() {
   return (
     <div>
-      <StateLessComponent />
-      <StateFullComponent />
+      {/* <StateLessComponent />
+      <StateFulComponent /> */}
+      <Home />
     </div>
   );
 }
