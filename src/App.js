@@ -2,13 +2,13 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import StateLessComponent from './components/StateLessComponent';
-import StateFullComponent from './components/StateFullComponent';
+import StateFulComponent from './components/StateFulComponent';
 
 function App() {
   return (
     <div>
       <StateLessComponent />
-      <StateFullComponent />
+      <StateFulComponent />
     </div>
   );
 }
