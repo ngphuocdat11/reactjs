@@ -1,3 +1,4 @@
+import Modal from './Modal';
 /**
  * các bước thực hiện:
  * 1. dàn layout (html, css)
@@ -17,6 +18,7 @@ import SanPham from './SanPham';
 export default class BaiTapGioHang extends Component {
   danhSachSanPham = [
     {
+      giaBan: 5000000,
       maSanPham: '1',
       tenSanPham: 'VinSmart Live',
       hinhAnh: './img/vsphone.jpg',
@@ -28,6 +30,7 @@ export default class BaiTapGioHang extends Component {
       rom: '6 GB',
     },
     {
+      giaBan: 7000000,
       maSanPham: '2',
       tenSanPham: 'Meizu 16Xs',
       hinhAnh: './img/meizuphone.jpg',
@@ -39,6 +42,7 @@ export default class BaiTapGioHang extends Component {
       rom: '6 GB',
     },
     {
+      giaBan: 15000000,
       maSanPham: '3',
       tenSanPham: 'Iphone XS Max',
       hinhAnh: './img/applephone.jpg',
@@ -62,13 +66,40 @@ export default class BaiTapGioHang extends Component {
       ram: '4 GB',
       rom: '6 GB',
     },
+    danhSachGioHang: [],
+  };
+
+  handleAddSP = (sanPham) => {
+    let danhSachGioHang = [...this.state.danhSachGioHang];
+    // danhSachGioHang.push(sanPham);
+    danhSachGioHang = [...danhSachGioHang, sanPham];
+    // setState
+    this.setState(
+      {
+        danhSachGioHang: danhSachGioHang,
+      },
+      () => {
+        console.log(this.state.danhSachGioHang);
+      }
+    );
+  };
+
+  handleDetail = (sanPham) => {
+    // setState
+    this.setState({
+      sanPhamChiTiet: sanPham,
+    });
   };
 
   renderDanhSachSanPham = () => {
     return this.danhSachSanPham.map((sanPham, index) => {
       return (
-        <div className='col-sm-4'>
-          <SanPham />
+        <div className='col-sm-4' key={index}>
+          <SanPham
+            handleDetail={this.handleDetail}
+            handleAddSP={this.handleAddSP}
+            sanPham={sanPham}
+          />
         </div>
       );
     });
@@ -92,61 +123,7 @@ export default class BaiTapGioHang extends Component {
             <div className='container'>
               <div className='row'>{this.renderDanhSachSanPham()}</div>
             </div>
-            <div
-              className='modal fade'
-              id='modelId'
-              tabIndex={-1}
-              role='dialog'
-              aria-labelledby='modelTitleId'
-              aria-hidden='true'
-            >
-              <div
-                className='modal-dialog'
-                role='document'
-                style={{ maxWidth: 1000 }}
-              >
-                <div className='modal-content'>
-                  <div className='modal-header'>
-                    <h5 className='modal-title'>Giỏ hàng</h5>
-                    <button
-                      type='button'
-                      className='close'
-                      data-dismiss='modal'
-                      aria-label='Close'
-                    >
-                      <span aria-hidden='true'>×</span>
-                    </button>
-                  </div>
-                  <div className='modal-body'>
-                    <table className='table'>
-                      <thead>
-                        <tr>
-                          <th>Mã sản phẩm</th>
-                          <th>tên sản phẩm</th>
-                          <th>hình ảnh</th>
-                          <th>số lượng</th>
-                          <th>đơn giá</th>
-                          <th>thành tiền</th>
-                        </tr>
-                      </thead>
-                      <tbody />
-                    </table>
-                  </div>
-                  <div className='modal-footer'>
-                    <button
-                      type='button'
-                      className='btn btn-secondary'
-                      data-dismiss='modal'
-                    >
-                      Close
-                    </button>
-                    <button type='button' className='btn btn-primary'>
-                      Save
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Modal danhSachGioHang={this.state.danhSachGioHang} />
             <div className='row'>
               <div className='col-sm-5'>
                 <img
