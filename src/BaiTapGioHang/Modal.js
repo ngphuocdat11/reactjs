@@ -4,7 +4,13 @@ import CartItem from './CartItem';
 export default class Modal extends Component {
   renderCardList = () => {
     return this.props.danhSachGioHang.map((cart, index) => {
-      return <CartItem cart={cart} key={index} />;
+      return (
+        <CartItem
+          handleDelete={this.props.handleDelete}
+          cart={cart}
+          key={index}
+        />
+      );
     });
   };
 
